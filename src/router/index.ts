@@ -1,7 +1,7 @@
 import Vue from "vue";
 import {createRouter,createWebHashHistory} from 'vue-router';
 import Login from "@/views/login.vue"
-import Layout from "@/views/layout.vue"
+import Layout from "@/views/layout/index.vue"
 const Home = {template:"<div>Home</div>"}
 const About = {template:"<div>About</div>"}
 
