@@ -1,19 +1,16 @@
 import Vue from "vue";
 import {createRouter,createWebHashHistory} from 'vue-router';
-import Login from "@/views/login.vue"
 import Layout from "@/views/layout/index.vue"
 const Home = {template:"<div>Home</div>"}
 const About = {template:"<div>About</div>"}
 
 
 const routes = [
-  { path:"/",component:Home },
-  {path:'',component:Home},
   {
     path: '/login',
     name: 'Login',
     hidden: true,
-    component:Login,
+    component:() => import ("@/views/login.vue"),
     meta: {
       title: '登录'
     }
@@ -22,12 +19,19 @@ const routes = [
     path: '/System',
     name: 'System',
     hidden: true,
-    component:Layout,
+    component:() => import ("@/views/layout/index.vue"),
+    children:[
+      {
+        path: '/System/item',
+        name: 'item',
+        hidden: true,
+        component:() => import ("@/views/item/index.vue"),
+      }
+    ],
     meta: {
       title: '登录'
     }
   },
-  { path:"/about",component:About},
 ]
 
 

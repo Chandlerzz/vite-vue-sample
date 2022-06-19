@@ -13,5 +13,12 @@ export default defineConfig({
       'vue': 'vue/dist/vue.esm-bundler.js',
       '@': resolve("src")
     }
-  }
+  },
+  css: {
+      preprocessorOptions: {
+        scss: {
+          // additionalData: `@import "@nutui/nutui/dist/styles/variables.scss";@import "./src/assets/css/variables.scss";@import "./src/assets/css/index.scss";`
+        }
+      }
+    },
 })
