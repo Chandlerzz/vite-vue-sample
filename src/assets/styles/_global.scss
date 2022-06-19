@@ -1,0 +1,29 @@
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+@media screen and (min-width: 375px) {
+  html {
+    /* 375基准，414px宽度时正好对应1小 */
+    font-size: calc(16px + 2 * (100vw - 375px) / 39);
+  }
+}
+@media screen and (min-width: 414px) {
+  html {
+    /* 屏幕宽度从414px到1000px，根字号大小累积增加4px（18px-22px） */
+    font-size: calc(18px + 4 * (100vw - 414px) / 586);
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    /* 屏幕宽度从1000px往后每增加100px，根字号大小就*/
+    font-size: calc(22px + 5 * (100vw - 1000px) / 1000);
+  }
+}
+*, *::before,*::after{
+  
+  box-sizing:border-box;
+  padding:0;
+  margin:0;
+}
+
