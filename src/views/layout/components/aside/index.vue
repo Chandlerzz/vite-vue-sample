@@ -132,7 +132,7 @@ onMounted(() => {
   .main-aside{
     display:flex;
     flex-flow:column;
-    color: #FFFFFF;
+    color: var(--aside-color);
     place-items:center;
   }
   .aside-header{
@@ -184,11 +184,11 @@ onMounted(() => {
 
   }
   a{
-    color:#FFFFFF;
+    color:var(--aside-color);
     text-decoration:none;
   }
   .active{
-    background:#4880FF;
+    background:var(--aside-link-background);
   }
 
 </style>

@@ -7,7 +7,7 @@
   font-size: 1rem;
   font-family: Source Han Sans CN-Regular, Source Han Sans CN;
   font-weight: 400;
-  background:#FFFFFF;
+  background:var(--header-background);
   // -webkit-text-fill-color: transparent;
   grid-area: header;
   display:flex;
@@ -27,7 +27,7 @@
 .main-aside {
   transition: transform 1s ease;
   grid-area: aside;
-  background: #2B3342;
+  background: var(--aside-background);
   box-shadow: 0px 3px 20px 1px rgba(0, 0, 0, 0.03);
   opacity: 1;
 }
