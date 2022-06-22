@@ -1,7 +1,14 @@
+<script setup lang='ts'>
+debugger
+const carousels = import.meta.globEager('/src/assets/images/carousel/*.png')
+const carousel = carousels['/src/assets/images/carousel/1-CAD.png'].default
+</script>
+
+
 <template>
   <el-carousel :interval="5000" arrow="always">
     <el-carousel-item v-for="item in 4" :key="item">
-      <img src="src/assets/images/carousel/1-CAD.png" justify="center" alt=""/>
+      <img :src="carousel" justify="center" alt=""/>
     </el-carousel-item>
   </el-carousel>
 </template>

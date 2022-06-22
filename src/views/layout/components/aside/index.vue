@@ -1,7 +1,7 @@
 <template>
   <aside ref="root" class="main-aside" :class="open ? 'open' : ''">
     <div class="aside-header">
-          <img src="/src/assets/images/组 9393.png" alt=""/>
+          <img :src="test9393" alt=""/>
           </div>
     <ul>
       <router-link
@@ -29,9 +29,9 @@ import { useStore } from '../../../../store'
 import {ref,computed, nextTick,onMounted} from 'vue'
 import {menu} from '../../../../data/menu'
 import {applications} from '../../../../data/applications'
-debugger
-const aa = applications
-console.log(aa)
+const pngs = import.meta.globEager('/src/assets/images/*.png')
+const test9393 = pngs['/src/assets/images/组 9393.png'].default
+const menus = menu.map(item => {item.icon = pngs[item.icon].default;return item})
 const store = useStore()
 const open = computed(()=>{
   return store.getters.getOpen

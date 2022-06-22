@@ -11,23 +11,28 @@
     const id = event.currentTarget.getAttribute("itemId")
     store.dispatch('filterItemById', parseInt(id))
   }
+const pngs = import.meta.globEager('/src/assets/images/*.png')
+debugger
+const test15688 = pngs["/src/assets/images/路径 15688.png"].default
+const test15654 = pngs["/src/assets/images/路径 15654.png"].default
+const risenLogo = pngs["/src/assets/images/risen-logo.png"].default
   
 </script>
 <template>
   <div class="container">
     <div :key="item.id" class="item" v-for=" item in itemList">  
       <el-avatar class="avatar"
-        src="/src/assets/images/risen-logo.png"
+        :src="risenLogo"
       />
       <div class="item-content">
         <div class="header">
           <span>{{item.name}}</span>
           <img class="favorite"
-            src="/src/assets/images/路径 15688.png"
+            :src="test15688"
           />
         </div>
         <div class="grade">
-          <img class="pentagram" src="/src/assets/images/路径 15654.png" :ley="item" v-for="item in [1,2,3,4,5]" alt="" />
+          <img class="pentagram" :src="test15654" :ley="item" v-for="item in [1,2,3,4,5]" alt="" />
         </div>
         <div class="description">
           <span>

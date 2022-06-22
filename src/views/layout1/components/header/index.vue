@@ -1,7 +1,7 @@
 <template>
   <header class="main-head">
     <div>
-      <img src="/src/assets/images/组 9400.png" alt=""/>
+      <img :src="test9400" alt=""/>
     </div>
     <div class="menu-right">
       <div class="flex">
@@ -31,6 +31,8 @@
 </template>
 
 <script setup lang='ts'>
+const pngs = import.meta.globEager('/src/assets/images/*.png')
+const test9400 = pngs['/src/assets/images/组 9400.png'].default
 </script>
 
 <style lang='scss' scoped>

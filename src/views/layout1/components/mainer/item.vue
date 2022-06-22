@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import {computed} from 'vue'
   import {useStore} from "../../../../store"
+  const pngs = import.meta.globEager('/src/assets/images/*.png')
+  const test15688 = pngs["/src/assets/images/路径 15688.png"].default
+  const test15654 = pngs["/src/assets/images/路径 15688.png"].default
+  const risenLogo = pngs["/src/assets/images/risen-logo.png"].default
   const store = useStore();
   const item = computed(() =>{
     return store.getters.getItemById;
@@ -8,16 +12,16 @@
 </script>
 <template>
   <div class="item">
-    <el-avatar class="avatar" src="/src/assets/images/risen-logo.png" />
+    <el-avatar class="avatar" :src="risenLogo" />
     <div class="item-content">
       <div class="header">
         <span>{{ item.name }}</span>
-        <img class="favorite" src="/src/assets/images/路径 15688.png" />
+        <img class="favorite" :src="test15688" />
       </div>
       <div class="grade">
         <img
           class="pentagram"
-          src="/src/assets/images/路径 15654.png"
+          :src="test15654"
           :ley="item"
           v-for="item in [1, 2, 3, 4, 5]"
           alt=""
