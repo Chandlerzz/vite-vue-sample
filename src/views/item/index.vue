@@ -1,61 +1,49 @@
 <script setup lang="ts">
-  import {ref, reactive} from 'vue';
-  const itemList =[
-    {
-      id:1,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:2,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:3,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:4,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:5,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:6,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:7,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-    {
-      id:8,
-      name:"阿里云-上云就上阿里云",
-      detail:"阿里云——阿里巴巴集团旗下公司，是全球领先的云计算及人工智能科技公司。提供免费试用、云服务器、云数据库、云安全、云企业应用等云计算服务，以及大数据、人工智能服务、精准",
-    },
-  ]
+  import {ref, reactive, computed} from 'vue';
+  import { useStore } from '../../store'
+  const store = useStore()
+  store.dispatch('filterItems',1)
+  const itemList = computed(() => {
+    return store.getters.getItemByMenuId
+  })
+
+  function clickDetail(event:any){
+    const id = event.currentTarget.getAttribute("itemId")
+    store.dispatch('filterItemById', parseInt(id))
+  }
+  
 </script>
 <template>
   <div class="container">
     <div :key="item.id" class="item" v-for=" item in itemList">  
       <el-avatar class="avatar"
-        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+        src="/src/assets/images/risen-logo.png"
       />
       <div class="item-content">
         <div class="header">
           <span>{{item.name}}</span>
-          <el-avatar class="favorite"
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          <img class="favorite"
+            src="/src/assets/images/路径 15688.png"
           />
         </div>
+        <div class="grade">
+          <img class="pentagram" src="/src/assets/images/路径 15654.png" :ley="item" v-for="item in [1,2,3,4,5]" alt="" />
+        </div>
+        <div class="description">
+          <span>
+            {{ item.description }} 
+          </span>
+        </div>
+        <div class="link">
+          <a :href="item.url" target="_blank">
+            <el-button  type="primary">公司官网</el-button>
+          </a>
+        </div >
+      <router-link to="/detail" >
+        <div class="showDetail" :itemId="item.id" @click="clickDetail">
+          查看详情→
+        </div>
+      </router-link>
       </div>
     </div>
 </div>
@@ -63,17 +51,13 @@
 
 
 <style  lang='scss' scoped>
+
 .container{
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   display:grid;
-  margin:20px 20px;
-  background:#FFFFFF;
-  box-shadow: 0px 3px 12px 1px rgba(0, 0, 0, 0.06);
-  border-radius: 0px 0px 0px 0px;
-  opacity: 1;
   .item{
-    margin-top:20px;
-    margin-left:15px;
+    padding:20px 20px 0 0;
+    margin:20px 20px 0 15px;
     display:grid;
     grid-template-columns:1fr 4fr;
     height: 260px;
@@ -87,17 +71,68 @@
       margin:0 auto;
     }
     .item-content{
+      padding-bottom:40px;
+      height:inherit;
+      overflow:hidden;
       display:grid;
+      grid-template-rows:1fr 1fr 1fr 1fr 1fr;
       .header{
+        font-size:0.77rem;
         display:flex;
         .favorite{
-          margin-left:auto
+          width:24px;
+          height:24px;
+          margin-left:auto;
         }
+      }
+      .grade{
+        display:flex;
+        gap:4px;
+        .pentagram{
+          width:0.8rem;
+          height:0.8rem;
+        }
+      }
+      .description{
+        font-size:0.55rem;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        color:var(--main-item-color);
+        span{
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:2;
+        }
+      }
+      .link{
+        display:flex;
+        a{
+          text-decoration:none;
+        }
+      }
+      .showDetail{
+        display:flex;
+        font-weight: 400;
+        color: #4880FF;
+        font-size:0.66rem;
+        cursor:pointer;
       }
       .avatar{
         margin-left:auto;
       }
     }
+  }
+}
+@media screen and (min-width: 1000px) {
+  .container{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .container{
+    grid-template-columns:1fr 1fr 1fr;
   }
 }
 </style>

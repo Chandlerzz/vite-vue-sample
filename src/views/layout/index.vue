@@ -22,7 +22,7 @@ onMounted(() => {
       <router-view />
     </main>
 
-    <footer class="main-footer">The footer</footer>
+    <footer class="main-footer"></footer>
   </div>
 </template>
 

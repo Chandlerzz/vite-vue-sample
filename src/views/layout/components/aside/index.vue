@@ -1,22 +1,16 @@
 <template>
   <aside ref="root" class="main-aside" :class="open ? 'open' : ''">
     <div class="aside-header">
-        <el-avatar class="avatar"
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        />
-          <div class="content">
-            <span>东方日升</span>
-            <span class="down">工业互联网平台</span>
-          </div>
+          <img src="/src/assets/images/组 9393.png" alt=""/>
           </div>
     <ul>
       <router-link
-        :to="'/system/item?id='+item.id"
-          :key =item.icon 
-          v-for="item in navList"
+        to="/home"
+        :key =item.icon 
+        v-for="item in menu"
         >
         <li 
-          @click="link"
+          @click="link" :menuId="item.id"
           >
           <div class="decoration">
           </div>
@@ -33,58 +27,20 @@
 <script setup lang='ts'>
 import { useStore } from '../../../../store'
 import {ref,computed, nextTick,onMounted} from 'vue'
+import {menu} from '../../../../data/menu'
+import {applications} from '../../../../data/applications'
+debugger
+const aa = applications
+console.log(aa)
 const store = useStore()
 const open = computed(()=>{
   return store.getters.getOpen
 })
-const navList = [
-  {
-    id:1,
-    name:"研发板块",
-    icon:"/src/assets/images/组 9394.png",
-  },
-  {
-    id:2,
-    name:"制造板块",
-    icon:"/src/assets/images/路径 15700.png",
-  },
-  {
-    id:3,
-    name:"运营板块",
-    icon:"/src/assets/images/组 9395.png",
-  },
-  {
-    id:4,
-    name:"采购板块",
-    icon:"/src/assets/images/组 9396.png",
-  },
-  {
-    id:5,
-    name:"物流板块",
-    icon:"/src/assets/images/组 9397.png",
-  },
-  {
-    id:6,
-    name:"运维服务",
-    icon:"/src/assets/images/组 9398.png",
-  },
-  {
-    id:7,
-    name:"信息安全",
-    icon:"/src/assets/images/路径 15710.png",
-  },
-  {
-    id:8,
-    name:"财务板块",
-    icon:"/src/assets/images/路径 15711.png",
-  },
-    {
-    id:9,
-    name:"办公板块",
-    icon:"/src/assets/images/路径 15712.png",
-  },
-]
+function navigator(){
+
+}
 function link(event:any){
+  //active item
   let li:any = event.srcElement
   let flag:boolean = true
   while(flag)
@@ -111,6 +67,9 @@ function link(event:any){
       child.classList.add("active")
     })
   }
+  // update the main content
+  const id = event.currentTarget.getAttribute("menuId")
+  store.dispatch('filterItems',parseInt(id))
 }
 const root = ref(null)
 onMounted(() => {

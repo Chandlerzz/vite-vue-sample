@@ -1,4 +1,5 @@
 import { InjectionKey } from 'vue'
+import {applications} from '../data/applications'
 /**
  * 引入 InjectionKey 并将其传入 useStore 使用过的任何地方，
  * 很快就会成为一项重复性的工作。为了简化问题，可以定义自己
@@ -12,7 +13,8 @@ import { useStore as baseUseStore, createStore, Store} from 'vuex'
 // 为 store state 声明类型
 export interface State {
     username: string,
-    count: number,
+    itemByMenuId: any,
+    itemById:any,
     layoutData: any,
     open:boolean,
 }
@@ -24,7 +26,8 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export const store = createStore<State>({
     state: {
         username: "测试store",
-        count: 0,
+        itemByMenuId: [],
+        itemById: {},
         layoutData:[], // 路由展示的内容
         open:false,
     },
@@ -34,6 +37,12 @@ export const store = createStore<State>({
         },
         getOpen: state => {
           return state.open
+        },
+        getItemByMenuId: state => {
+          return state.itemByMenuId
+        },
+        getItemById: state => {
+          return state.itemById
         }
     },
     mutations: {
@@ -48,9 +57,26 @@ export const store = createStore<State>({
         },
         SET_OPEN(state,params:boolean) {
           state.open = !state.open
+        },
+        SET_ITEMBYMEMUID(state,params:any)
+        {
+          state.itemByMenuId = params
+        },
+        SET_ITEMBYID(state,params:any)
+        {
+          state.itemById = params
         }
     },
-    actions:{}
+    actions:{
+      filterItems ({ commit },menuId:number){
+        const result = applications.filter((item) => item.menuId === menuId ) 
+        commit("SET_ITEMBYMEMUID",result)
+      },
+      filterItemById ({ commit },id:number){
+        const result = applications.filter((item) => item.id === id ) 
+        commit("SET_ITEMBYID",result[0])
+      },
+    }
 })
 
 // 定义自己的 `useStore` 组合式函数

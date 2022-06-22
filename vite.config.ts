@@ -1,17 +1,32 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-const path = require('path')
-function resolve (dir) {
-  return path.join(__dirname, dir)
-}
+import { join } from "path";
+import alias from "@rollup/plugin-alias";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  allowJs:true,
+  plugins: [alias(), vue()],
+  server:{
+    hmr:{
+      overlay:false,
+    }
+  },
   resolve:{
     alias:{
       'vue': 'vue/dist/vue.esm-bundler.js',
-      '@': resolve("src")
+     '@': join(__dirname, "src"),
+    }
+  },
+  build:{
+    rollupOptions: {
+      external: ['vue'],
+      preserveEntrySignatures: 'strict',
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
     }
   },
   css: {

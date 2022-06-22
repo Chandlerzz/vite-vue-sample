@@ -7,6 +7,10 @@ const About = {template:"<div>About</div>"}
 
 const routes = [
   {
+    path:'/',
+    redirect:'/home'
+  },
+  {
     path: '/login',
     name: 'Login',
     hidden: true,
@@ -22,14 +26,23 @@ const routes = [
     component:() => import ("@/views/layout/index.vue"),
     children:[
       {
-        path: '/System/item',
+        path: '/home',
         name: 'item',
         hidden: true,
         component:() => import ("@/views/item/index.vue"),
       }
     ],
     meta: {
-      title: '登录'
+      title: 'home'
+    }
+  },
+  {
+    path: '/detail',
+    name: 'detail',
+    hidden: true,
+    component:() => import ("@/views/layout1/index.vue"),
+    meta: {
+      title: 'detail'
     }
   },
 ]
