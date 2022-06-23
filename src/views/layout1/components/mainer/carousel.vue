@@ -1,8 +1,8 @@
 <script setup lang='ts'>
 debugger
 const carousels = import.meta.globEager('/src/assets/images/carousel/*.png')
-const carousel = carousels['/src/assets/images/carousel/1-CAD.png'].default
 </script>
+const carousel = carousels['/src/assets/images/carousel/1-CAD.png'].default
 
 
 <template>

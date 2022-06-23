@@ -1,13 +1,13 @@
 <template>
   <header class="main-head">
-    <div class="box">
-      <el-icon class="icon-search"><Search /></el-icon>
-      <input placeholder="请输入关键字/词" type="text" value="" name="" id="" />
-    </div>
     <div class="hamburger">
       <label for="checkbox" @click="open" class="label">
         <el-icon><Fold /></el-icon> </label
       ><input type="checkbox" name="checkbox" value="" id="checkbox" />
+    </div>
+    <div class="box" v-show="showInput">
+      <el-icon class="icon-search"><Search /></el-icon>
+      <input placeholder="请输入关键字/词" type="text" value="" name="" id="" />
     </div>
     <div class="menu-right">
       <div class="flex">
@@ -24,7 +24,7 @@
         </el-icon>
       </div>
       <div class="flex">
-        <el-avatar
+        <img class="avatar"
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         />
       </div>
@@ -38,14 +38,29 @@
 
 <script setup lang='ts'>
 import { useStore } from "../../../../store";
-import { onMounted } from "vue";
+import { onMounted,ref } from "vue";
 
+const showInput = ref(false);
 const store = useStore();
 function open(event: any) {
   console.log(event);
   const test = store.getters.getOpen;
   store.commit("SET_OPEN", !test);
 }
+
+function myFunction(x:any) {
+  if (x.matches) { // If media query matches
+    showInput.value = false
+  } else {
+    showInput.value = true
+  }
+}
+
+onMounted(() => {
+  var x = window.matchMedia("(max-width: 700px)")
+  myFunction(x) // Call listener function at run time
+})
+
 </script>
 
 <style lang='scss' scoped>
@@ -116,6 +131,10 @@ input:-moz-placeholder {
   display: flex;
   gap: 0.2rem;
   place-items: center;
+  .avatar{
+    width:40px;
+    border-radius:50%;
+  }
 }
 </style>
 

@@ -3,7 +3,7 @@
   import {useStore} from "../../../../store"
   const pngs = import.meta.globEager('/src/assets/images/*.png')
   const test15688 = pngs["/src/assets/images/路径 15688.png"].default
-  const test15654 = pngs["/src/assets/images/路径 15688.png"].default
+  const test15654 = pngs["/src/assets/images/路径 15654.png"].default
   const risenLogo = pngs["/src/assets/images/risen-logo.png"].default
   const store = useStore();
   const item = computed(() =>{
@@ -12,7 +12,7 @@
 </script>
 <template>
   <div class="item">
-    <el-avatar class="avatar" :src="risenLogo" />
+    <img class="avatar" :src="risenLogo" />
     <div class="item-content">
       <div class="header">
         <span>{{ item.name }}</span>
@@ -22,7 +22,7 @@
         <img
           class="pentagram"
           :src="test15654"
-          :ley="item"
+          :Key="item"
           v-for="item in [1, 2, 3, 4, 5]"
           alt=""
         />
@@ -51,7 +51,8 @@
     height:100%;
     .avatar {
       display: flex;
-      margin: 0 auto;
+      width:60px;
+      margin:0 auto;
     }
     .item-content {
       padding-bottom: 40px;

@@ -31,14 +31,11 @@ import {menu} from '../../../../data/menu'
 import {applications} from '../../../../data/applications'
 const pngs = import.meta.globEager('/src/assets/images/*.png')
 const test9393 = pngs['/src/assets/images/组 9393.png'].default
-const menus = menu.map(item => {item.icon = pngs[item.icon].default;return item})
 const store = useStore()
 const open = computed(()=>{
   return store.getters.getOpen
 })
-function navigator(){
 
-}
 function link(event:any){
   //active item
   let li:any = event.srcElement
@@ -67,6 +64,7 @@ function link(event:any){
       child.classList.add("active")
     })
   }
+  store.commit("SET_OPEN",false)
   // update the main content
   const id = event.currentTarget.getAttribute("menuId")
   store.dispatch('filterItems',parseInt(id))

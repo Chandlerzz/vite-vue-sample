@@ -3,6 +3,8 @@
   background:#FAFAFA;
 }
 .main-head {
+  position:sticky;
+  top:0;
   padding:0 10px;
   font-size: 1rem;
   font-family: Source Han Sans CN-Regular, Source Han Sans CN;
@@ -30,6 +32,10 @@
   margin:20px 20px;
 }
 .main-aside {
+  width:10rem;
+  position:fixed;
+  top:3rem;
+  bottom:0;
   transition: transform 1s ease;
   grid-area: aside;
   background: var(--aside-background);
@@ -44,7 +50,7 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 10rem 5fr;
-  grid-template-rows: 3rem 10fr 1fr;
+  grid-template-rows: 3rem 10fr 0fr;
   grid-template-areas:
     "header header"
     "aside content"
@@ -60,13 +66,14 @@ aside {
 @media screen and (min-width: 700px) {
   .wrapper {
     grid-template-columns: 10rem 5fr;
-    grid-template-rows: 3rem 10fr 1fr;
+    grid-template-rows: 3rem 10fr 0fr;
     grid-template-areas:
       "aside header  "
       "aside content "
       "aside footer  ";
   }
-  aside {
+  .main-aside {
+    top:0;
     color:"#FFFFFF";
     transform: translate(0);
   }

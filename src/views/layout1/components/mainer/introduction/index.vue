@@ -5,22 +5,18 @@
         <li @click="navigator" name="version">版本说明</li>
         <li @click="navigator" name="comments">评介说明</li>
     </ul>
-    <component :is="currentTabComponent" :item="item"></component>
   </div>
 </template>
 
 <script setup lang='ts'>
-import {shallowRef, nextTick, computed,defineProps, onMounted, ref } from "vue";
-  import {useStore} from "../../../../../store"
-import introduction from "./introduction.vue"
-import version from "./version.vue"
-import comments from "./comments.vue"
+import {useStore} from "../../../../../store"
+import { nextTick, computed, onMounted, ref,defineEmits } from "vue";
+const emit = defineEmits(['selectComponent'])
 const root = ref(null);
 const store = useStore()
 const item = computed(() =>{
   return store.getters.getItemById;
 })
-const currentTabComponent = shallowRef(introduction);
 onMounted(() => {
   let li: any = root.value;
   li = li.getElementsByTagName("li")[0];
@@ -28,19 +24,8 @@ onMounted(() => {
 });
 function navigator(event: any) {
   const li = event.srcElement;
-  debugger
   const name = li.getAttribute('name')
-  switch (name) {
-    case 'introduction':
-     currentTabComponent.value = introduction; 
-      break;
-    case 'version':
-     currentTabComponent.value = version; 
-      break;
-    case 'comments':
-     currentTabComponent.value = comments; 
-      break;
-  }
+  emit('selectComponent',name)
   const ul = li.parentElement;
   const lis = ul.getElementsByTagName("li");
   for (let item of lis) {
@@ -63,6 +48,7 @@ ul {
     font-size: 0.6rem;
     color: initial;
     border-bottom: none;
+    cursor:pointer;
   }
   .active {
     color: #335fe7;

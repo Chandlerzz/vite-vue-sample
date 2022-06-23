@@ -18,7 +18,7 @@
         <el-icon><SemiSelect style="transform: rotate(90deg)" /> </el-icon>
       </div>
       <div class="flex">
-        <el-avatar
+        <img class="avatar"
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         />
       </div>
@@ -37,6 +37,7 @@ const test9400 = pngs['/src/assets/images/组 9400.png'].default
 
 <style lang='scss' scoped>
 .main-head{
+  z-index:100;
   height: 3rem;
   background: #2B3342;
   box-shadow: 1px 2px 8px 1px rgba(15, 6, 14, 0.13);
@@ -87,6 +88,10 @@ const test9400 = pngs['/src/assets/images/组 9400.png'].default
   display: flex;
   gap: 0.2rem;
   place-items: center;
+  .avatar{
+    width:40px;
+    border-radius:50%;
+  }
 }
 </style>
 
