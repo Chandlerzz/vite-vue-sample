@@ -1,10 +1,8 @@
 <script setup lang="ts">
   import {computed} from 'vue'
   import {useStore} from "../../../../store"
-  const pngs = import.meta.globEager('/src/assets/images/*.png')
-  const test15688 = pngs["/src/assets/images/路径 15688.png"].default
-  const test15654 = pngs["/src/assets/images/路径 15654.png"].default
-  const risenLogo = pngs["/src/assets/images/risen-logo.png"].default
+  const test15688 = "https://object.risen.com/risen-industries-apps/images/路径 15688.png";
+  const test15654 = "https://object.risen.com/risen-industries-apps/images/路径 15654.png";
   const store = useStore();
   const item = computed(() =>{
     return store.getters.getItemById;
@@ -12,7 +10,7 @@
 </script>
 <template>
   <div class="item">
-    <img class="avatar" :src="risenLogo" />
+      <img  class="avatar" :src="'https://object.risen.com/risen-industries-apps/images/logo/'+item.name+'.png'" />
     <div class="item-content">
       <div class="header">
         <span>{{ item.name }}</span>

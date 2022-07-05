@@ -1,14 +1,17 @@
 <script setup lang='ts'>
-debugger
-const carousels = import.meta.globEager('/src/assets/images/carousel/*.png')
+  import {computed} from 'vue'
+  import {useStore} from "../../../../store"
+  const store = useStore();
+  const content = computed(() =>{
+    return store.getters.getItemById;
+  })
 </script>
-const carousel = carousels['/src/assets/images/carousel/1-CAD.png'].default
 
 
 <template>
   <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item v-for="item in 4" :key="item">
-      <img :src="carousel" justify="center" alt=""/>
+    <el-carousel-item v-for="item in content.imgUrl" :key="item">
+      <img :src="'https://object.risen.com/risen-industries-apps/images/carousel/'+content.name+'/'+item" justify="center" alt=""/>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -28,5 +31,10 @@ const carousel = carousels['/src/assets/images/carousel/1-CAD.png'].default
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+img{
+  width:110%;
+  height:110%;
+  object-fit:cover;
 }
 </style>

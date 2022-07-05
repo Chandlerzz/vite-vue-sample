@@ -11,16 +11,13 @@ function clickDetail(event: any) {
   const id = event.currentTarget.getAttribute("itemId");
   store.dispatch("filterItemById", parseInt(id));
 }
-const pngs = import.meta.globEager("/src/assets/images/*.png");
-debugger;
-const test15688 = pngs["/src/assets/images/路径 15688.png"].default;
-const test15654 = pngs["/src/assets/images/路径 15654.png"].default;
-const risenLogo = pngs["/src/assets/images/risen-logo.png"].default;
+const test15688 = "https://object.risen.com/risen-industries-apps/images/路径 15688.png";
+const test15654 = "https://object.risen.com/risen-industries-apps/images/路径 15654.png";
 </script>
 <template>
   <div class="container">
     <div :key="item.id" class="item" v-for="item in itemList">
-      <img class="avatar" :src="risenLogo" />
+      <img  class="avatar" :src="'https://object.risen.com/risen-industries-apps/images/logo/'+item.name+'.png'" />
       <div class="item-content">
         <div class="header">
           <span>{{ item.name }}</span>
@@ -67,7 +64,6 @@ const risenLogo = pngs["/src/assets/images/risen-logo.png"].default;
     grid-template-columns: 1fr 4fr;
     height: 260px;
     background: #ffffff;
-    box-shadow: 0px 3px 16px 1px rgba(0, 0, 0, 0.08);
     border-radius: 0px 0px 0px 0px;
     opacity: 1;
     border: 1px solid #eeeeee;
@@ -129,6 +125,10 @@ const risenLogo = pngs["/src/assets/images/risen-logo.png"].default;
         margin-left: auto;
       }
     }
+  }
+  .item:hover{
+    box-shadow: 0px 3px 16px 1px rgba(0, 0, 0, 0.08);
+    
   }
 }
 @media screen and (min-width: 1000px) {

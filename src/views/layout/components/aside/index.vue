@@ -29,8 +29,7 @@ import { useStore } from '../../../../store'
 import {ref,computed, nextTick,onMounted} from 'vue'
 import {menu} from '../../../../data/menu'
 import {applications} from '../../../../data/applications'
-const pngs = import.meta.globEager('/src/assets/images/*.png')
-const test9393 = pngs['/src/assets/images/组 9393.png'].default
+const test9393 = "https://object.risen.com/risen-industries-apps/images/组 9402.png";
 const store = useStore()
 const open = computed(()=>{
   return store.getters.getOpen

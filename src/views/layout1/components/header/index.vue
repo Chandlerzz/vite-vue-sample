@@ -31,8 +31,7 @@
 </template>
 
 <script setup lang='ts'>
-const pngs = import.meta.globEager('/src/assets/images/*.png')
-const test9400 = pngs['/src/assets/images/组 9400.png'].default
+const test9400 = "https://object.risen.com/risen-industries-apps/images/组 9400.png";
 </script>
 
 <style lang='scss' scoped>

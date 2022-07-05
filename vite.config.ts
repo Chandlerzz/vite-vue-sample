@@ -16,7 +16,6 @@ const entryHtml = fs.readFileSync('./index.html', { encoding: 'utf-8' });
  
 // https://vitejs.dev/config/
 export default defineConfig({
-  allowJs:true,
   plugins: [
     alias(),
     vue(),
@@ -42,13 +41,14 @@ export default defineConfig({
            )
            .replace(
                '<!-- script placeholder -->',
-               `<script type="text/javascript" src="nf-tool.umd.js"></script>`,
+               `<script type="text/javascript" src="https://object.risen.com/risen-industries-apps/dist/nf-tool.umd.js"></script>`,
            );
        },
        }),
     },
   ],
   server:{
+    port:3030,
     hmr:{
       overlay:false,
     }
